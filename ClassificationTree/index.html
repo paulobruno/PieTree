@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.node {
+    cursor: pointer;
+}
+
+.node path {
+    stroke: white;
+    stroke-width: 2px;
+}
+
+.node text {
+    font: 12px sans-serif;
+}
+
+.link {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 4;
+}
+.label {
+    font: 14px sans-serif;
+    text-anchor: middle;
+    fill: #fff;
+}
+.d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+}
+</style>
+</head>
+
+<body>
+<script src="../d3/d3.js"></script>
+<script src="../d3/d3.tip.v0.6.3.js"></script>
+
+<script>
+    var treeData =
+    {
+        "cutPoint": 12.5,
+        "cutPredictor": "cbo ",
+        "children": [
+            {
+                "cutPoint": 8.5,
+                "iParent": 0,
+                "cutPredictor": "numberOfPublicAttributes ",
+                "children": [
+                    {
+                        "cutPoint": 26,
+                        "iParent": 1,
+                        "cutPredictor": "noc ",
+                        "children": [
+                            {
+                                "cutPoint": 4.5,
+                                "iParent": 3,
+                                "cutPredictor": "numberOfMethodsInherited ",
+                                "children": [
+                                    {
+                                        "cutPoint": 0,
+                                        "iParent": 7,
+                                        "cutPredictor": "",
+                                        "isBranch": false,
+                                        "classes": [
+                                            {
+                                                "label": "yes",
+                                                "count": 1,
+                                                "percent": 100
+                                            },
+                                            {
+                                                "label": "no",
+                                                "count": 0,
+                                                "percent": 0
+                                            }
+                                        ],
+                                        "name": "",
+                                        "numOfExamples": 1,
+                                        "i": 15
+                                    },
+                                    {
+                                        "cutPoint": 5.5,
+                                        "iParent": 7,
+                                        "cutPredictor": "numberOfAttributes ",
+                                        "children": [
+                                            {
+                                                "cutPoint": 2.5,
+                                                "iParent": 16,
+                                                "cutPredictor": "fanIn ",
+                                                "children": [
+                                                    {
+                                                        "cutPoint": 2.5,
+                                                        "iParent": 21,
+                                                        "cutPredictor": "noc ",
+                                                        "children": [
+                                                            {
+                                                                "cutPoint": 2.5,
+                                                                "iParent": 27,
+                                                                "cutPredictor": "dit ",
+                                                                "children": [
+                                                                    {
+                                                                        "cutPoint": 0,
+                                                                        "iParent": 33,
+                                                                        "cutPredictor": "",
+                                                                        "isBranch": false,
+                                                                        "classes": [
+                                                                            {
+                                                                                "label": "yes",
+                                                                                "count": 2,
+                                                                                "percent": 0.8230452675
+                                                                            },
+                                                                            {
+                                                                                "label": "no",
+                                                                                "count": 241,
+                                                                                "percent": 99.17695473
+                                                                            }
+                                                                        ],
+                                                                        "name": "",
+                                                                        "numOfExamples": 243,
+                                                                        "i": 41
+                                                                    },
+                                                                    {
+                                                                        "cutPoint": 5.5,
+                                                                        "iParent": 33,
+                                                                        "cutPredictor": "numberOfLinesOfCode ",
+                                                                        "children": [
+                                                                            {
+                                                                                "cutPoint": 0,
+                                                                                "iParent": 42,
+                                                                                "cutPredictor": "",
+                                                                                "isBranch": false,
+                                                                                "classes": [
+                                                                                    {
+                                                                                        "label": "yes",
+                                                                                        "count": 1,
+                                                                                        "percent": 100
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "no",
+                                                                                        "count": 0,
+                                                                                        "percent": 0
+                                                                                    }
+                                                                                ],
+                                                                                "name": "",
+                                                                                "numOfExamples": 1,
+                                                                                "i": 49
+                                                                            },
+                                                                            {
+                                                                                "cutPoint": 4.5,
+                                                                                "iParent": 42,
+                                                                                "cutPredictor": "numberOfAttributes ",
+                                                                                "children": [
+                                                                                    {
+                                                                                        "cutPoint": 6.5,
+                                                                                        "iParent": 50,
+                                                                                        "cutPredictor": "numberOfLinesOfCode ",
+                                                                                        "children": [
+                                                                                            {
+                                                                                                "cutPoint": 0,
+                                                                                                "iParent": 59,
+                                                                                                "cutPredictor": "",
+                                                                                                "isBranch": false,
+                                                                                                "classes": [
+                                                                                                    {
+                                                                                                        "label": "yes",
+                                                                                                        "count": 1,
+                                                                                                        "percent": 25.0
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "label": "no",
+                                                                                                        "count": 3,
+                                                                                                        "percent": 75.0
+                                                                                                    }
+                                                                                                ],
+                                                                                                "name": "",
+                                                                                                "numOfExamples": 4,
+                                                                                                "i": 71
+                                                                                            },
+                                                                                            {
+                                                                                                "cutPoint": 49.5,
+                                                                                                "iParent": 59,
+                                                                                                "cutPredictor": "numberOfMethodsInherited ",
+                                                                                                "children": [
+                                                                                                    {
+                                                                                                        "cutPoint": 0,
+                                                                                                        "iParent": 72,
+                                                                                                        "cutPredictor": "",
+                                                                                                        "isBranch": false,
+                                                                                                        "classes": [
+                                                                                                            {
+                                                                                                                "label": "yes",
+                                                                                                                "count": 0,
+                                                                                                                "percent": 0
+                                                                                                            },
+                                                                                                            {
+                                                                                                                "label": "no",
+                                                                                                                "count": 71,
+                                                                                                                "percent": 100
+                                                                                                            }
+                                                                                                        ],
+                                                                                                        "name": "",
+                                                                                                        "numOfExamples": 71,
+                                                                                                        "i": 79
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "cutPoint": 0.5,
+                                                                                                        "iParent": 72,
+                                                                                                        "cutPredictor": "numberOfAttributesInherited ",
+                                                                                                        "children": [
+                                                                                                            {
+                                                                                                                "cutPoint": 0,
+                                                                                                                "iParent": 80,
+                                                                                                                "cutPredictor": "",
+                                                                                                                "isBranch": false,
+                                                                                                                "classes": [
+                                                                                                                    {
+                                                                                                                        "label": "yes",
+                                                                                                                        "count": 1,
+                                                                                                                        "percent": 100
+                                                                                                                    },
+                                                                                                                    {
+                                                                                                                        "label": "no",
+                                                                                                                        "count": 0,
+                                                                                                                        "percent": 0
+                                                                                                                    }
+                                                                                                                ],
+                                                                                                                "name": "",
+                                                                                                                "numOfExamples": 1,
+                                                                                                                "i": 81
+                                                                                                            },
+                                                                                                            {
+                                                                                                                "cutPoint": 0,
+                                                                                                                "iParent": 80,
+                                                                                                                "cutPredictor": "",
+                                                                                                                "isBranch": false,
+                                                                                                                "classes": [
+                                                                                                                    {
+                                                                                                                        "label": "yes",
+                                                                                                                        "count": 0,
+                                                                                                                        "percent": 0
+                                                                                                                    },
+                                                                                                                    {
+                                                                                                                        "label": "no",
+                                                                                                                        "count": 13,
+                                                                                                                        "percent": 100
+                                                                                                                    }
+                                                                                                                ],
+                                                                                                                "name": "",
+                                                                                                                "numOfExamples": 13,
+                                                                                                                "i": 82
+                                                                                                            }
+                                                                                                        ],
+                                                                                                        "isBranch": true,
+                                                                                                        "classes": [
+                                                                                                            {
+                                                                                                                "label": "yes",
+                                                                                                                "count": 1,
+                                                                                                                "percent": 7.1428571430000005
+                                                                                                            },
+                                                                                                            {
+                                                                                                                "label": "no",
+                                                                                                                "count": 13,
+                                                                                                                "percent": 92.85714286
+                                                                                                            }
+                                                                                                        ],
+                                                                                                        "name": "numberOfAttributesInherited [0.5]",
+                                                                                                        "numOfExamples": 14,
+                                                                                                        "i": 80
+                                                                                                    }
+                                                                                                ],
+                                                                                                "isBranch": true,
+                                                                                                "classes": [
+                                                                                                    {
+                                                                                                        "label": "yes",
+                                                                                                        "count": 1,
+                                                                                                        "percent": 1.176470588
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "label": "no",
+                                                                                                        "count": 84,
+                                                                                                        "percent": 98.82352941
+                                                                                                    }
+                                                                                                ],
+                                                                                                "name": "numberOfMethodsInherited [49.5]",
+                                                                                                "numOfExamples": 85,
+                                                                                                "i": 72
+                                                                                            }
+                                                                                        ],
+                                                                                        "isBranch": true,
+                                                                                        "classes": [
+                                                                                            {
+                                                                                                "label": "yes",
+                                                                                                "count": 2,
+                                                                                                "percent": 2.247191011
+                                                                                            },
+                                                                                            {
+                                                                                                "label": "no",
+                                                                                                "count": 87,
+                                                                                                "percent": 97.75280898999999
+                                                                                            }
+                                                                                        ],
+                                                                                        "name": "numberOfLinesOfCode [6.5]",
+                                                                                        "numOfExamples": 89,
+                                                                                        "i": 59
+                                                                                    },
+                                                                                    {
+                                                                                        "cutPoint": 0,
+                                                                                        "iParent": 50,
+                                                                                        "cutPredictor": "",
+                                                                                        "isBranch": false,
+                                                                                        "classes": [
+                                                                                            {
+                                                                                                "label": "yes",
+                                                                                                "count": 1,
+                                                                                                "percent": 33.333333329999995
+                                                                                            },
+                                                                                            {
+                                                                                                "label": "no",
+                                                                                                "count": 2,
+                                                                                                "percent": 66.66666667
+                                                                                            }
+                                                                                        ],
+                                                                                        "name": "",
+                                                                                        "numOfExamples": 3,
+                                                                                        "i": 60
+                                                                                    }
+                                                                                ],
+                                                                                "isBranch": true,
+                                                                                "classes": [
+                                                                                    {
+                                                                                        "label": "yes",
+                                                                                        "count": 3,
+                                                                                        "percent": 3.2608695649999997
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "no",
+                                                                                        "count": 89,
+                                                                                        "percent": 96.73913043
+                                                                                    }
+                                                                                ],
+                                                                                "name": "numberOfAttributes [4.5]",
+                                                                                "numOfExamples": 92,
+                                                                                "i": 50
+                                                                            }
+                                                                        ],
+                                                                        "isBranch": true,
+                                                                        "classes": [
+                                                                            {
+                                                                                "label": "yes",
+                                                                                "count": 4,
+                                                                                "percent": 4.301075269
+                                                                            },
+                                                                            {
+                                                                                "label": "no",
+                                                                                "count": 89,
+                                                                                "percent": 95.69892473
+                                                                            }
+                                                                        ],
+                                                                        "name": "numberOfLinesOfCode [5.5]",
+                                                                        "numOfExamples": 93,
+                                                                        "i": 42
+                                                                    }
+                                                                ],
+                                                                "isBranch": true,
+                                                                "classes": [
+                                                                    {
+                                                                        "label": "yes",
+                                                                        "count": 6,
+                                                                        "percent": 1.7857142860000002
+                                                                    },
+                                                                    {
+                                                                        "label": "no",
+                                                                        "count": 330,
+                                                                        "percent": 98.21428571
+                                                                    }
+                                                                ],
+                                                                "name": "dit [2.5]",
+                                                                "numOfExamples": 336,
+                                                                "i": 33
+                                                            },
+                                                            {
+                                                                "cutPoint": 0,
+                                                                "iParent": 27,
+                                                                "cutPredictor": "",
+                                                                "isBranch": false,
+                                                                "classes": [
+                                                                    {
+                                                                        "label": "yes",
+                                                                        "count": 2,
+                                                                        "percent": 28.571428570000002
+                                                                    },
+                                                                    {
+                                                                        "label": "no",
+                                                                        "count": 5,
+                                                                        "percent": 71.42857143
+                                                                    }
+                                                                ],
+                                                                "name": "",
+                                                                "numOfExamples": 7,
+                                                                "i": 34
+                                                            }
+                                                        ],
+                                                        "isBranch": true,
+                                                        "classes": [
+                                                            {
+                                                                "label": "yes",
+                                                                "count": 8,
+                                                                "percent": 2.3323615159999997
+                                                            },
+                                                            {
+                                                                "label": "no",
+                                                                "count": 335,
+                                                                "percent": 97.66763848
+                                                            }
+                                                        ],
+                                                        "name": "noc [2.5]",
+                                                        "numOfExamples": 343,
+                                                        "i": 27
+                                                    },
+                                                    {
+                                                        "cutPoint": 5.5,
+                                                        "iParent": 21,
+                                                        "cutPredictor": "wmc ",
+                                                        "children": [
+                                                            {
+                                                                "cutPoint": 0,
+                                                                "iParent": 28,
+                                                                "cutPredictor": "",
+                                                                "isBranch": false,
+                                                                "classes": [
+                                                                    {
+                                                                        "label": "yes",
+                                                                        "count": 0,
+                                                                        "percent": 0
+                                                                    },
+                                                                    {
+                                                                        "label": "no",
+                                                                        "count": 38,
+                                                                        "percent": 100
+                                                                    }
+                                                                ],
+                                                                "name": "",
+                                                                "numOfExamples": 38,
+                                                                "i": 35
+                                                            },
+                                                            {
+                                                                "cutPoint": 1,
+                                                                "iParent": 28,
+                                                                "cutPredictor": "numberOfPublicMethods ",
+                                                                "children": [
+                                                                    {
+                                                                        "cutPoint": 0,
+                                                                        "iParent": 36,
+                                                                        "cutPredictor": "",
+                                                                        "isBranch": false,
+                                                                        "classes": [
+                                                                            {
+                                                                                "label": "yes",
+                                                                                "count": 1,
+                                                                                "percent": 100
+                                                                            },
+                                                                            {
+                                                                                "label": "no",
+                                                                                "count": 0,
+                                                                                "percent": 0
+                                                                            }
+                                                                        ],
+                                                                        "name": "",
+                                                                        "numOfExamples": 1,
+                                                                        "i": 43
+                                                                    },
+                                                                    {
+                                                                        "cutPoint": 24.5,
+                                                                        "iParent": 36,
+                                                                        "cutPredictor": "lcom ",
+                                                                        "children": [
+                                                                            {
+                                                                                "cutPoint": 5.5,
+                                                                                "iParent": 44,
+                                                                                "cutPredictor": "fanOut ",
+                                                                                "children": [
+                                                                                    {
+                                                                                        "cutPoint": 6.5,
+                                                                                        "iParent": 51,
+                                                                                        "cutPredictor": "numberOfPublicMethods ",
+                                                                                        "children": [
+                                                                                            {
+                                                                                                "cutPoint": 0,
+                                                                                                "iParent": 61,
+                                                                                                "cutPredictor": "",
+                                                                                                "isBranch": false,
+                                                                                                "classes": [
+                                                                                                    {
+                                                                                                        "label": "yes",
+                                                                                                        "count": 3,
+                                                                                                        "percent": 14.285714290000001
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "label": "no",
+                                                                                                        "count": 18,
+                                                                                                        "percent": 85.71428571
+                                                                                                    }
+                                                                                                ],
+                                                                                                "name": "",
+                                                                                                "numOfExamples": 21,
+                                                                                                "i": 73
+                                                                                            },
+                                                                                            {
+                                                                                                "cutPoint": 0,
+                                                                                                "iParent": 61,
+                                                                                                "cutPredictor": "",
+                                                                                                "isBranch": false,
+                                                                                                "classes": [
+                                                                                                    {
+                                                                                                        "label": "yes",
+                                                                                                        "count": 1,
+                                                                                                        "percent": 100
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "label": "no",
+                                                                                                        "count": 0,
+                                                                                                        "percent": 0
+                                                                                                    }
+                                                                                                ],
+                                                                                                "name": "",
+                                                                                                "numOfExamples": 1,
+                                                                                                "i": 74
+                                                                                            }
+                                                                                        ],
+                                                                                        "isBranch": true,
+                                                                                        "classes": [
+                                                                                            {
+                                                                                                "label": "yes",
+                                                                                                "count": 4,
+                                                                                                "percent": 18.18181818
+                                                                                            },
+                                                                                            {
+                                                                                                "label": "no",
+                                                                                                "count": 18,
+                                                                                                "percent": 81.81818182
+                                                                                            }
+                                                                                        ],
+                                                                                        "name": "numberOfPublicMethods [6.5]",
+                                                                                        "numOfExamples": 22,
+                                                                                        "i": 61
+                                                                                    },
+                                                                                    {
+                                                                                        "cutPoint": 0,
+                                                                                        "iParent": 51,
+                                                                                        "cutPredictor": "",
+                                                                                        "isBranch": false,
+                                                                                        "classes": [
+                                                                                            {
+                                                                                                "label": "yes",
+                                                                                                "count": 1,
+                                                                                                "percent": 100
+                                                                                            },
+                                                                                            {
+                                                                                                "label": "no",
+                                                                                                "count": 0,
+                                                                                                "percent": 0
+                                                                                            }
+                                                                                        ],
+                                                                                        "name": "",
+                                                                                        "numOfExamples": 1,
+                                                                                        "i": 62
+                                                                                    }
+                                                                                ],
+                                                                                "isBranch": true,
+                                                                                "classes": [
+                                                                                    {
+                                                                                        "label": "yes",
+                                                                                        "count": 5,
+                                                                                        "percent": 21.73913043
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "no",
+                                                                                        "count": 18,
+                                                                                        "percent": 78.26086957
+                                                                                    }
+                                                                                ],
+                                                                                "name": "fanOut [5.5]",
+                                                                                "numOfExamples": 23,
+                                                                                "i": 51
+                                                                            },
+                                                                            {
+                                                                                "cutPoint": 0,
+                                                                                "iParent": 44,
+                                                                                "cutPredictor": "",
+                                                                                "isBranch": false,
+                                                                                "classes": [
+                                                                                    {
+                                                                                        "label": "yes",
+                                                                                        "count": 0,
+                                                                                        "percent": 0
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "no",
+                                                                                        "count": 18,
+                                                                                        "percent": 100
+                                                                                    }
+                                                                                ],
+                                                                                "name": "",
+                                                                                "numOfExamples": 18,
+                                                                                "i": 52
+                                                                            }
+                                                                        ],
+                                                                        "isBranch": true,
+                                                                        "classes": [
+                                                                            {
+                                                                                "label": "yes",
+                                                                                "count": 5,
+                                                                                "percent": 12.19512195
+                                                                            },
+                                                                            {
+                                                                                "label": "no",
+                                                                                "count": 36,
+                                                                                "percent": 87.80487805
+                                                                            }
+                                                                        ],
+                                                                        "name": "lcom [24.5]",
+                                                                        "numOfExamples": 41,
+                                                                        "i": 44
+                                                                    }
+                                                                ],
+                                                                "isBranch": true,
+                                                                "classes": [
+                                                                    {
+                                                                        "label": "yes",
+                                                                        "count": 6,
+                                                                        "percent": 14.285714290000001
+                                                                    },
+                                                                    {
+                                                                        "label": "no",
+                                                                        "count": 36,
+                                                                        "percent": 85.71428571
+                                                                    }
+                                                                ],
+                                                                "name": "numberOfPublicMethods [1]",
+                                                                "numOfExamples": 42,
+                                                                "i": 36
+                                                            }
+                                                        ],
+                                                        "isBranch": true,
+                                                        "classes": [
+                                                            {
+                                                                "label": "yes",
+                                                                "count": 6,
+                                                                "percent": 7.5
+                                                            },
+                                                            {
+                                                                "label": "no",
+                                                                "count": 74,
+                                                                "percent": 92.5
+                                                            }
+                                                        ],
+                                                        "name": "wmc [5.5]",
+                                                        "numOfExamples": 80,
+                                                        "i": 28
+                                                    }
+                                                ],
+                                                "isBranch": true,
+                                                "classes": [
+                                                    {
+                                                        "label": "yes",
+                                                        "count": 14,
+                                                        "percent": 3.309692671
+                                                    },
+                                                    {
+                                                        "label": "no",
+                                                        "count": 409,
+                                                        "percent": 96.69030733
+                                                    }
+                                                ],
+                                                "name": "fanIn [2.5]",
+                                                "numOfExamples": 423,
+                                                "i": 21
+                                            },
+                                            {
+                                                "cutPoint": 45.5,
+                                                "iParent": 16,
+                                                "cutPredictor": "numberOfMethodsInherited ",
+                                                "children": [
+                                                    {
+                                                        "cutPoint": 1.5,
+                                                        "iParent": 22,
+                                                        "cutPredictor": "fanOut ",
+                                                        "children": [
+                                                            {
+                                                                "cutPoint": 0,
+                                                                "iParent": 29,
+                                                                "cutPredictor": "",
+                                                                "isBranch": false,
+                                                                "classes": [
+                                                                    {
+                                                                        "label": "yes",
+                                                                        "count": 0,
+                                                                        "percent": 0
+                                                                    },
+                                                                    {
+                                                                        "label": "no",
+                                                                        "count": 36,
+                                                                        "percent": 100
+                                                                    }
+                                                                ],
+                                                                "name": "",
+                                                                "numOfExamples": 36,
+                                                                "i": 37
+                                                            },
+                                                            {
+                                                                "cutPoint": 21.5,
+                                                                "iParent": 29,
+                                                                "cutPredictor": "rfc ",
+                                                                "children": [
+                                                                    {
+                                                                        "cutPoint": 14.5,
+                                                                        "iParent": 38,
+                                                                        "cutPredictor": "rfc ",
+                                                                        "children": [
+                                                                            {
+                                                                                "cutPoint": 5.5,
+                                                                                "iParent": 45,
+                                                                                "cutPredictor": "numberOfPublicMethods ",
+                                                                                "children": [
+                                                                                    {
+                                                                                        "cutPoint": 0,
+                                                                                        "iParent": 53,
+                                                                                        "cutPredictor": "",
+                                                                                        "isBranch": false,
+                                                                                        "classes": [
+                                                                                            {
+                                                                                                "label": "yes",
+                                                                                                "count": 2,
+                                                                                                "percent": 8.333333332999999
+                                                                                            },
+                                                                                            {
+                                                                                                "label": "no",
+                                                                                                "count": 22,
+                                                                                                "percent": 91.66666667
+                                                                                            }
+                                                                                        ],
+                                                                                        "name": "",
+                                                                                        "numOfExamples": 24,
+                                                                                        "i": 63
+                                                                                    },
+                                                                                    {
+                                                                                        "cutPoint": 0,
+                                                                                        "iParent": 53,
+                                                                                        "cutPredictor": "",
+                                                                                        "isBranch": false,
+                                                                                        "classes": [
+                                                                                            {
+                                                                                                "label": "yes",
+                                                                                                "count": 1,
+                                                                                                "percent": 100
+                                                                                            },
+                                                                                            {
+                                                                                                "label": "no",
+                                                                                                "count": 0,
+                                                                                                "percent": 0
+                                                                                            }
+                                                                                        ],
+                                                                                        "name": "",
+                                                                                        "numOfExamples": 1,
+                                                                                        "i": 64
+                                                                                    }
+                                                                                ],
+                                                                                "isBranch": true,
+                                                                                "classes": [
+                                                                                    {
+                                                                                        "label": "yes",
+                                                                                        "count": 3,
+                                                                                        "percent": 12.0
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "no",
+                                                                                        "count": 22,
+                                                                                        "percent": 88.0
+                                                                                    }
+                                                                                ],
+                                                                                "name": "numberOfPublicMethods [5.5]",
+                                                                                "numOfExamples": 25,
+                                                                                "i": 53
+                                                                            },
+                                                                            {
+                                                                                "cutPoint": 11.5,
+                                                                                "iParent": 45,
+                                                                                "cutPredictor": "numberOfAttributes ",
+                                                                                "children": [
+                                                                                    {
+                                                                                        "cutPoint": 2.5,
+                                                                                        "iParent": 54,
+                                                                                        "cutPredictor": "dit ",
+                                                                                        "children": [
+                                                                                            {
+                                                                                                "cutPoint": 0,
+                                                                                                "iParent": 65,
+                                                                                                "cutPredictor": "",
+                                                                                                "isBranch": false,
+                                                                                                "classes": [
+                                                                                                    {
+                                                                                                        "label": "yes",
+                                                                                                        "count": 1,
+                                                                                                        "percent": 12.5
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "label": "no",
+                                                                                                        "count": 7,
+                                                                                                        "percent": 87.5
+                                                                                                    }
+                                                                                                ],
+                                                                                                "name": "",
+                                                                                                "numOfExamples": 8,
+                                                                                                "i": 75
+                                                                                            },
+                                                                                            {
+                                                                                                "cutPoint": 0,
+                                                                                                "iParent": 65,
+                                                                                                "cutPredictor": "",
+                                                                                                "isBranch": false,
+                                                                                                "classes": [
+                                                                                                    {
+                                                                                                        "label": "yes",
+                                                                                                        "count": 3,
+                                                                                                        "percent": 75.0
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "label": "no",
+                                                                                                        "count": 1,
+                                                                                                        "percent": 25.0
+                                                                                                    }
+                                                                                                ],
+                                                                                                "name": "",
+                                                                                                "numOfExamples": 4,
+                                                                                                "i": 76
+                                                                                            }
+                                                                                        ],
+                                                                                        "isBranch": true,
+                                                                                        "classes": [
+                                                                                            {
+                                                                                                "label": "yes",
+                                                                                                "count": 4,
+                                                                                                "percent": 33.333333329999995
+                                                                                            },
+                                                                                            {
+                                                                                                "label": "no",
+                                                                                                "count": 8,
+                                                                                                "percent": 66.66666667
+                                                                                            }
+                                                                                        ],
+                                                                                        "name": "dit [2.5]",
+                                                                                        "numOfExamples": 12,
+                                                                                        "i": 65
+                                                                                    },
+                                                                                    {
+                                                                                        "cutPoint": 0,
+                                                                                        "iParent": 54,
+                                                                                        "cutPredictor": "",
+                                                                                        "isBranch": false,
+                                                                                        "classes": [
+                                                                                            {
+                                                                                                "label": "yes",
+                                                                                                "count": 2,
+                                                                                                "percent": 100
+                                                                                            },
+                                                                                            {
+                                                                                                "label": "no",
+                                                                                                "count": 0,
+                                                                                                "percent": 0
+                                                                                            }
+                                                                                        ],
+                                                                                        "name": "",
+                                                                                        "numOfExamples": 2,
+                                                                                        "i": 66
+                                                                                    }
+                                                                                ],
+                                                                                "isBranch": true,
+                                                                                "classes": [
+                                                                                    {
+                                                                                        "label": "yes",
+                                                                                        "count": 6,
+                                                                                        "percent": 42.85714286
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "no",
+                                                                                        "count": 8,
+                                                                                        "percent": 57.142857140000004
+                                                                                    }
+                                                                                ],
+                                                                                "name": "numberOfAttributes [11.5]",
+                                                                                "numOfExamples": 14,
+                                                                                "i": 54
+                                                                            }
+                                                                        ],
+                                                                        "isBranch": true,
+                                                                        "classes": [
+                                                                            {
+                                                                                "label": "yes",
+                                                                                "count": 9,
+                                                                                "percent": 23.07692308
+                                                                            },
+                                                                            {
+                                                                                "label": "no",
+                                                                                "count": 30,
+                                                                                "percent": 76.92307692
+                                                                            }
+                                                                        ],
+                                                                        "name": "rfc [14.5]",
+                                                                        "numOfExamples": 39,
+                                                                        "i": 45
+                                                                    },
+                                                                    {
+                                                                        "cutPoint": 11.5,
+                                                                        "iParent": 38,
+                                                                        "cutPredictor": "numberOfPrivateAttributes ",
+                                                                        "children": [
+                                                                            {
+                                                                                "cutPoint": 0.5,
+                                                                                "iParent": 46,
+                                                                                "cutPredictor": "numberOfAttributesInherited ",
+                                                                                "children": [
+                                                                                    {
+                                                                                        "cutPoint": 0,
+                                                                                        "iParent": 55,
+                                                                                        "cutPredictor": "",
+                                                                                        "isBranch": false,
+                                                                                        "classes": [
+                                                                                            {
+                                                                                                "label": "yes",
+                                                                                                "count": 1,
+                                                                                                "percent": 2.127659574
+                                                                                            },
+                                                                                            {
+                                                                                                "label": "no",
+                                                                                                "count": 46,
+                                                                                                "percent": 97.87234043000001
+                                                                                            }
+                                                                                        ],
+                                                                                        "name": "",
+                                                                                        "numOfExamples": 47,
+                                                                                        "i": 67
+                                                                                    },
+                                                                                    {
+                                                                                        "cutPoint": 6.5,
+                                                                                        "iParent": 55,
+                                                                                        "cutPredictor": "numberOfAttributes ",
+                                                                                        "children": [
+                                                                                            {
+                                                                                                "cutPoint": 0,
+                                                                                                "iParent": 68,
+                                                                                                "cutPredictor": "",
+                                                                                                "isBranch": false,
+                                                                                                "classes": [
+                                                                                                    {
+                                                                                                        "label": "yes",
+                                                                                                        "count": 1,
+                                                                                                        "percent": 100
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "label": "no",
+                                                                                                        "count": 0,
+                                                                                                        "percent": 0
+                                                                                                    }
+                                                                                                ],
+                                                                                                "name": "",
+                                                                                                "numOfExamples": 1,
+                                                                                                "i": 77
+                                                                                            },
+                                                                                            {
+                                                                                                "cutPoint": 0,
+                                                                                                "iParent": 68,
+                                                                                                "cutPredictor": "",
+                                                                                                "isBranch": false,
+                                                                                                "classes": [
+                                                                                                    {
+                                                                                                        "label": "yes",
+                                                                                                        "count": 1,
+                                                                                                        "percent": 7.1428571430000005
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "label": "no",
+                                                                                                        "count": 13,
+                                                                                                        "percent": 92.85714286
+                                                                                                    }
+                                                                                                ],
+                                                                                                "name": "",
+                                                                                                "numOfExamples": 14,
+                                                                                                "i": 78
+                                                                                            }
+                                                                                        ],
+                                                                                        "isBranch": true,
+                                                                                        "classes": [
+                                                                                            {
+                                                                                                "label": "yes",
+                                                                                                "count": 2,
+                                                                                                "percent": 13.33333333
+                                                                                            },
+                                                                                            {
+                                                                                                "label": "no",
+                                                                                                "count": 13,
+                                                                                                "percent": 86.66666667
+                                                                                            }
+                                                                                        ],
+                                                                                        "name": "numberOfAttributes [6.5]",
+                                                                                        "numOfExamples": 15,
+                                                                                        "i": 68
+                                                                                    }
+                                                                                ],
+                                                                                "isBranch": true,
+                                                                                "classes": [
+                                                                                    {
+                                                                                        "label": "yes",
+                                                                                        "count": 3,
+                                                                                        "percent": 4.838709677
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "no",
+                                                                                        "count": 59,
+                                                                                        "percent": 95.16129032
+                                                                                    }
+                                                                                ],
+                                                                                "name": "numberOfAttributesInherited [0.5]",
+                                                                                "numOfExamples": 62,
+                                                                                "i": 55
+                                                                            },
+                                                                            {
+                                                                                "cutPoint": 0,
+                                                                                "iParent": 46,
+                                                                                "cutPredictor": "",
+                                                                                "isBranch": false,
+                                                                                "classes": [
+                                                                                    {
+                                                                                        "label": "yes",
+                                                                                        "count": 2,
+                                                                                        "percent": 22.222222220000003
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "no",
+                                                                                        "count": 7,
+                                                                                        "percent": 77.77777778000001
+                                                                                    }
+                                                                                ],
+                                                                                "name": "",
+                                                                                "numOfExamples": 9,
+                                                                                "i": 56
+                                                                            }
+                                                                        ],
+                                                                        "isBranch": true,
+                                                                        "classes": [
+                                                                            {
+                                                                                "label": "yes",
+                                                                                "count": 5,
+                                                                                "percent": 7.042253521
+                                                                            },
+                                                                            {
+                                                                                "label": "no",
+                                                                                "count": 66,
+                                                                                "percent": 92.95774648
+                                                                            }
+                                                                        ],
+                                                                        "name": "numberOfPrivateAttributes [11.5]",
+                                                                        "numOfExamples": 71,
+                                                                        "i": 46
+                                                                    }
+                                                                ],
+                                                                "isBranch": true,
+                                                                "classes": [
+                                                                    {
+                                                                        "label": "yes",
+                                                                        "count": 14,
+                                                                        "percent": 12.72727273
+                                                                    },
+                                                                    {
+                                                                        "label": "no",
+                                                                        "count": 96,
+                                                                        "percent": 87.27272726999999
+                                                                    }
+                                                                ],
+                                                                "name": "rfc [21.5]",
+                                                                "numOfExamples": 110,
+                                                                "i": 38
+                                                            }
+                                                        ],
+                                                        "isBranch": true,
+                                                        "classes": [
+                                                            {
+                                                                "label": "yes",
+                                                                "count": 14,
+                                                                "percent": 9.589041096
+                                                            },
+                                                            {
+                                                                "label": "no",
+                                                                "count": 132,
+                                                                "percent": 90.41095890000001
+                                                            }
+                                                        ],
+                                                        "name": "fanOut [1.5]",
+                                                        "numOfExamples": 146,
+                                                        "i": 29
+                                                    },
+                                                    {
+                                                        "cutPoint": 0,
+                                                        "iParent": 22,
+                                                        "cutPredictor": "",
+                                                        "isBranch": false,
+                                                        "classes": [
+                                                            {
+                                                                "label": "yes",
+                                                                "count": 2,
+                                                                "percent": 66.66666667
+                                                            },
+                                                            {
+                                                                "label": "no",
+                                                                "count": 1,
+                                                                "percent": 33.333333329999995
+                                                            }
+                                                        ],
+                                                        "name": "",
+                                                        "numOfExamples": 3,
+                                                        "i": 30
+                                                    }
+                                                ],
+                                                "isBranch": true,
+                                                "classes": [
+                                                    {
+                                                        "label": "yes",
+                                                        "count": 16,
+                                                        "percent": 10.738255030000001
+                                                    },
+                                                    {
+                                                        "label": "no",
+                                                        "count": 133,
+                                                        "percent": 89.26174497
+                                                    }
+                                                ],
+                                                "name": "numberOfMethodsInherited [45.5]",
+                                                "numOfExamples": 149,
+                                                "i": 22
+                                            }
+                                        ],
+                                        "isBranch": true,
+                                        "classes": [
+                                            {
+                                                "label": "yes",
+                                                "count": 30,
+                                                "percent": 5.2447552449999995
+                                            },
+                                            {
+                                                "label": "no",
+                                                "count": 542,
+                                                "percent": 94.75524476
+                                            }
+                                        ],
+                                        "name": "numberOfAttributes [5.5]",
+                                        "numOfExamples": 572,
+                                        "i": 16
+                                    }
+                                ],
+                                "isBranch": true,
+                                "classes": [
+                                    {
+                                        "label": "yes",
+                                        "count": 31,
+                                        "percent": 5.410122164000001
+                                    },
+                                    {
+                                        "label": "no",
+                                        "count": 542,
+                                        "percent": 94.58987784
+                                    }
+                                ],
+                                "name": "numberOfMethodsInherited [4.5]",
+                                "numOfExamples": 573,
+                                "i": 7
+                            },
+                            {
+                                "cutPoint": 0,
+                                "iParent": 3,
+                                "cutPredictor": "",
+                                "isBranch": false,
+                                "classes": [
+                                    {
+                                        "label": "yes",
+                                        "count": 1,
+                                        "percent": 100
+                                    },
+                                    {
+                                        "label": "no",
+                                        "count": 0,
+                                        "percent": 0
+                                    }
+                                ],
+                                "name": "",
+                                "numOfExamples": 1,
+                                "i": 8
+                            }
+                        ],
+                        "isBranch": true,
+                        "classes": [
+                            {
+                                "label": "yes",
+                                "count": 32,
+                                "percent": 5.574912892
+                            },
+                            {
+                                "label": "no",
+                                "count": 542,
+                                "percent": 94.42508711
+                            }
+                        ],
+                        "name": "noc [26]",
+                        "numOfExamples": 574,
+                        "i": 3
+                    },
+                    {
+                        "cutPoint": 3.5,
+                        "iParent": 1,
+                        "cutPredictor": "cbo ",
+                        "children": [
+                            {
+                                "cutPoint": 0,
+                                "iParent": 4,
+                                "cutPredictor": "",
+                                "isBranch": false,
+                                "classes": [
+                                    {
+                                        "label": "yes",
+                                        "count": 3,
+                                        "percent": 100
+                                    },
+                                    {
+                                        "label": "no",
+                                        "count": 0,
+                                        "percent": 0
+                                    }
+                                ],
+                                "name": "",
+                                "numOfExamples": 3,
+                                "i": 9
+                            },
+                            {
+                                "cutPoint": 0,
+                                "iParent": 4,
+                                "cutPredictor": "",
+                                "isBranch": false,
+                                "classes": [
+                                    {
+                                        "label": "yes",
+                                        "count": 1,
+                                        "percent": 11.111111110000001
+                                    },
+                                    {
+                                        "label": "no",
+                                        "count": 8,
+                                        "percent": 88.88888888999999
+                                    }
+                                ],
+                                "name": "",
+                                "numOfExamples": 9,
+                                "i": 10
+                            }
+                        ],
+                        "isBranch": true,
+                        "classes": [
+                            {
+                                "label": "yes",
+                                "count": 4,
+                                "percent": 33.333333329999995
+                            },
+                            {
+                                "label": "no",
+                                "count": 8,
+                                "percent": 66.66666667
+                            }
+                        ],
+                        "name": "cbo [3.5]",
+                        "numOfExamples": 12,
+                        "i": 4
+                    }
+                ],
+                "isBranch": true,
+                "classes": [
+                    {
+                        "label": "yes",
+                        "count": 36,
+                        "percent": 6.14334471
+                    },
+                    {
+                        "label": "no",
+                        "count": 550,
+                        "percent": 93.85665529
+                    }
+                ],
+                "name": "numberOfPublicAttributes [8.5]",
+                "numOfExamples": 586,
+                "i": 1
+            },
+            {
+                "cutPoint": 290,
+                "iParent": 0,
+                "cutPredictor": "numberOfLinesOfCode ",
+                "children": [
+                    {
+                        "cutPoint": 21,
+                        "iParent": 2,
+                        "cutPredictor": "noc ",
+                        "children": [
+                            {
+                                "cutPoint": 7.5,
+                                "iParent": 5,
+                                "cutPredictor": "numberOfAttributesInherited ",
+                                "children": [
+                                    {
+                                        "cutPoint": 10.5,
+                                        "iParent": 11,
+                                        "cutPredictor": "numberOfPublicMethods ",
+                                        "children": [
+                                            {
+                                                "cutPoint": 0,
+                                                "iParent": 17,
+                                                "cutPredictor": "",
+                                                "isBranch": false,
+                                                "classes": [
+                                                    {
+                                                        "label": "yes",
+                                                        "count": 3,
+                                                        "percent": 5.882352941
+                                                    },
+                                                    {
+                                                        "label": "no",
+                                                        "count": 48,
+                                                        "percent": 94.11764706
+                                                    }
+                                                ],
+                                                "name": "",
+                                                "numOfExamples": 51,
+                                                "i": 23
+                                            },
+                                            {
+                                                "cutPoint": 5.5,
+                                                "iParent": 17,
+                                                "cutPredictor": "numberOfAttributes ",
+                                                "children": [
+                                                    {
+                                                        "cutPoint": 168,
+                                                        "iParent": 24,
+                                                        "cutPredictor": "numberOfLinesOfCode ",
+                                                        "children": [
+                                                            {
+                                                                "cutPoint": 0.5,
+                                                                "iParent": 31,
+                                                                "cutPredictor": "numberOfPublicAttributes ",
+                                                                "children": [
+                                                                    {
+                                                                        "cutPoint": 26.5,
+                                                                        "iParent": 39,
+                                                                        "cutPredictor": "numberOfLinesOfCode ",
+                                                                        "children": [
+                                                                            {
+                                                                                "cutPoint": 0,
+                                                                                "iParent": 47,
+                                                                                "cutPredictor": "",
+                                                                                "isBranch": false,
+                                                                                "classes": [
+                                                                                    {
+                                                                                        "label": "yes",
+                                                                                        "count": 1,
+                                                                                        "percent": 100
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "no",
+                                                                                        "count": 0,
+                                                                                        "percent": 0
+                                                                                    }
+                                                                                ],
+                                                                                "name": "",
+                                                                                "numOfExamples": 1,
+                                                                                "i": 57
+                                                                            },
+                                                                            {
+                                                                                "cutPoint": 2,
+                                                                                "iParent": 47,
+                                                                                "cutPredictor": "numberOfPrivateMethods ",
+                                                                                "children": [
+                                                                                    {
+                                                                                        "cutPoint": 0,
+                                                                                        "iParent": 58,
+                                                                                        "cutPredictor": "",
+                                                                                        "isBranch": false,
+                                                                                        "classes": [
+                                                                                            {
+                                                                                                "label": "yes",
+                                                                                                "count": 1,
+                                                                                                "percent": 9.090909091
+                                                                                            },
+                                                                                            {
+                                                                                                "label": "no",
+                                                                                                "count": 10,
+                                                                                                "percent": 90.90909091
+                                                                                            }
+                                                                                        ],
+                                                                                        "name": "",
+                                                                                        "numOfExamples": 11,
+                                                                                        "i": 69
+                                                                                    },
+                                                                                    {
+                                                                                        "cutPoint": 0,
+                                                                                        "iParent": 58,
+                                                                                        "cutPredictor": "",
+                                                                                        "isBranch": false,
+                                                                                        "classes": [
+                                                                                            {
+                                                                                                "label": "yes",
+                                                                                                "count": 1,
+                                                                                                "percent": 100
+                                                                                            },
+                                                                                            {
+                                                                                                "label": "no",
+                                                                                                "count": 0,
+                                                                                                "percent": 0
+                                                                                            }
+                                                                                        ],
+                                                                                        "name": "",
+                                                                                        "numOfExamples": 1,
+                                                                                        "i": 70
+                                                                                    }
+                                                                                ],
+                                                                                "isBranch": true,
+                                                                                "classes": [
+                                                                                    {
+                                                                                        "label": "yes",
+                                                                                        "count": 2,
+                                                                                        "percent": 16.666666669999998
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "no",
+                                                                                        "count": 10,
+                                                                                        "percent": 83.33333333
+                                                                                    }
+                                                                                ],
+                                                                                "name": "numberOfPrivateMethods [2]",
+                                                                                "numOfExamples": 12,
+                                                                                "i": 58
+                                                                            }
+                                                                        ],
+                                                                        "isBranch": true,
+                                                                        "classes": [
+                                                                            {
+                                                                                "label": "yes",
+                                                                                "count": 3,
+                                                                                "percent": 23.07692308
+                                                                            },
+                                                                            {
+                                                                                "label": "no",
+                                                                                "count": 10,
+                                                                                "percent": 76.92307692
+                                                                            }
+                                                                        ],
+                                                                        "name": "numberOfLinesOfCode [26.5]",
+                                                                        "numOfExamples": 13,
+                                                                        "i": 47
+                                                                    },
+                                                                    {
+                                                                        "cutPoint": 0,
+                                                                        "iParent": 39,
+                                                                        "cutPredictor": "",
+                                                                        "isBranch": false,
+                                                                        "classes": [
+                                                                            {
+                                                                                "label": "yes",
+                                                                                "count": 2,
+                                                                                "percent": 100
+                                                                            },
+                                                                            {
+                                                                                "label": "no",
+                                                                                "count": 0,
+                                                                                "percent": 0
+                                                                            }
+                                                                        ],
+                                                                        "name": "",
+                                                                        "numOfExamples": 2,
+                                                                        "i": 48
+                                                                    }
+                                                                ],
+                                                                "isBranch": true,
+                                                                "classes": [
+                                                                    {
+                                                                        "label": "yes",
+                                                                        "count": 5,
+                                                                        "percent": 33.333333329999995
+                                                                    },
+                                                                    {
+                                                                        "label": "no",
+                                                                        "count": 10,
+                                                                        "percent": 66.66666667
+                                                                    }
+                                                                ],
+                                                                "name": "numberOfPublicAttributes [0.5]",
+                                                                "numOfExamples": 15,
+                                                                "i": 39
+                                                            },
+                                                            {
+                                                                "cutPoint": 0,
+                                                                "iParent": 31,
+                                                                "cutPredictor": "",
+                                                                "isBranch": false,
+                                                                "classes": [
+                                                                    {
+                                                                        "label": "yes",
+                                                                        "count": 3,
+                                                                        "percent": 100
+                                                                    },
+                                                                    {
+                                                                        "label": "no",
+                                                                        "count": 0,
+                                                                        "percent": 0
+                                                                    }
+                                                                ],
+                                                                "name": "",
+                                                                "numOfExamples": 3,
+                                                                "i": 40
+                                                            }
+                                                        ],
+                                                        "isBranch": true,
+                                                        "classes": [
+                                                            {
+                                                                "label": "yes",
+                                                                "count": 8,
+                                                                "percent": 44.444444440000005
+                                                            },
+                                                            {
+                                                                "label": "no",
+                                                                "count": 10,
+                                                                "percent": 55.55555556
+                                                            }
+                                                        ],
+                                                        "name": "numberOfLinesOfCode [168]",
+                                                        "numOfExamples": 18,
+                                                        "i": 31
+                                                    },
+                                                    {
+                                                        "cutPoint": 0,
+                                                        "iParent": 24,
+                                                        "cutPredictor": "",
+                                                        "isBranch": false,
+                                                        "classes": [
+                                                            {
+                                                                "label": "yes",
+                                                                "count": 1,
+                                                                "percent": 7.692307692
+                                                            },
+                                                            {
+                                                                "label": "no",
+                                                                "count": 12,
+                                                                "percent": 92.30769231
+                                                            }
+                                                        ],
+                                                        "name": "",
+                                                        "numOfExamples": 13,
+                                                        "i": 32
+                                                    }
+                                                ],
+                                                "isBranch": true,
+                                                "classes": [
+                                                    {
+                                                        "label": "yes",
+                                                        "count": 9,
+                                                        "percent": 29.03225806
+                                                    },
+                                                    {
+                                                        "label": "no",
+                                                        "count": 22,
+                                                        "percent": 70.96774194
+                                                    }
+                                                ],
+                                                "name": "numberOfAttributes [5.5]",
+                                                "numOfExamples": 31,
+                                                "i": 24
+                                            }
+                                        ],
+                                        "isBranch": true,
+                                        "classes": [
+                                            {
+                                                "label": "yes",
+                                                "count": 12,
+                                                "percent": 14.634146340000001
+                                            },
+                                            {
+                                                "label": "no",
+                                                "count": 70,
+                                                "percent": 85.36585366
+                                            }
+                                        ],
+                                        "name": "numberOfPublicMethods [10.5]",
+                                        "numOfExamples": 82,
+                                        "i": 17
+                                    },
+                                    {
+                                        "cutPoint": 0,
+                                        "iParent": 11,
+                                        "cutPredictor": "",
+                                        "isBranch": false,
+                                        "classes": [
+                                            {
+                                                "label": "yes",
+                                                "count": 2,
+                                                "percent": 100
+                                            },
+                                            {
+                                                "label": "no",
+                                                "count": 0,
+                                                "percent": 0
+                                            }
+                                        ],
+                                        "name": "",
+                                        "numOfExamples": 2,
+                                        "i": 18
+                                    }
+                                ],
+                                "isBranch": true,
+                                "classes": [
+                                    {
+                                        "label": "yes",
+                                        "count": 14,
+                                        "percent": 16.666666669999998
+                                    },
+                                    {
+                                        "label": "no",
+                                        "count": 70,
+                                        "percent": 83.33333333
+                                    }
+                                ],
+                                "name": "numberOfAttributesInherited [7.5]",
+                                "numOfExamples": 84,
+                                "i": 11
+                            },
+                            {
+                                "cutPoint": 0,
+                                "iParent": 5,
+                                "cutPredictor": "",
+                                "isBranch": false,
+                                "classes": [
+                                    {
+                                        "label": "yes",
+                                        "count": 2,
+                                        "percent": 100
+                                    },
+                                    {
+                                        "label": "no",
+                                        "count": 0,
+                                        "percent": 0
+                                    }
+                                ],
+                                "name": "",
+                                "numOfExamples": 2,
+                                "i": 12
+                            }
+                        ],
+                        "isBranch": true,
+                        "classes": [
+                            {
+                                "label": "yes",
+                                "count": 16,
+                                "percent": 18.60465116
+                            },
+                            {
+                                "label": "no",
+                                "count": 70,
+                                "percent": 81.39534884
+                            }
+                        ],
+                        "name": "noc [21]",
+                        "numOfExamples": 86,
+                        "i": 5
+                    },
+                    {
+                        "cutPoint": 88.5,
+                        "iParent": 2,
+                        "cutPredictor": "rfc ",
+                        "children": [
+                            {
+                                "cutPoint": 0,
+                                "iParent": 6,
+                                "cutPredictor": "",
+                                "isBranch": false,
+                                "classes": [
+                                    {
+                                        "label": "yes",
+                                        "count": 0,
+                                        "percent": 0
+                                    },
+                                    {
+                                        "label": "no",
+                                        "count": 3,
+                                        "percent": 100
+                                    }
+                                ],
+                                "name": "",
+                                "numOfExamples": 3,
+                                "i": 13
+                            },
+                            {
+                                "cutPoint": 15.5,
+                                "iParent": 6,
+                                "cutPredictor": "numberOfAttributesInherited ",
+                                "children": [
+                                    {
+                                        "cutPoint": 1,
+                                        "iParent": 14,
+                                        "cutPredictor": "fanIn ",
+                                        "children": [
+                                            {
+                                                "cutPoint": 0,
+                                                "iParent": 19,
+                                                "cutPredictor": "",
+                                                "isBranch": false,
+                                                "classes": [
+                                                    {
+                                                        "label": "yes",
+                                                        "count": 0,
+                                                        "percent": 0
+                                                    },
+                                                    {
+                                                        "label": "no",
+                                                        "count": 1,
+                                                        "percent": 100
+                                                    }
+                                                ],
+                                                "name": "",
+                                                "numOfExamples": 1,
+                                                "i": 25
+                                            },
+                                            {
+                                                "cutPoint": 0,
+                                                "iParent": 19,
+                                                "cutPredictor": "",
+                                                "isBranch": false,
+                                                "classes": [
+                                                    {
+                                                        "label": "yes",
+                                                        "count": 11,
+                                                        "percent": 100
+                                                    },
+                                                    {
+                                                        "label": "no",
+                                                        "count": 0,
+                                                        "percent": 0
+                                                    }
+                                                ],
+                                                "name": "",
+                                                "numOfExamples": 11,
+                                                "i": 26
+                                            }
+                                        ],
+                                        "isBranch": true,
+                                        "classes": [
+                                            {
+                                                "label": "yes",
+                                                "count": 11,
+                                                "percent": 91.66666667
+                                            },
+                                            {
+                                                "label": "no",
+                                                "count": 1,
+                                                "percent": 8.333333332999999
+                                            }
+                                        ],
+                                        "name": "fanIn [1]",
+                                        "numOfExamples": 12,
+                                        "i": 19
+                                    },
+                                    {
+                                        "cutPoint": 0,
+                                        "iParent": 14,
+                                        "cutPredictor": "",
+                                        "isBranch": false,
+                                        "classes": [
+                                            {
+                                                "label": "yes",
+                                                "count": 1,
+                                                "percent": 25.0
+                                            },
+                                            {
+                                                "label": "no",
+                                                "count": 3,
+                                                "percent": 75.0
+                                            }
+                                        ],
+                                        "name": "",
+                                        "numOfExamples": 4,
+                                        "i": 20
+                                    }
+                                ],
+                                "isBranch": true,
+                                "classes": [
+                                    {
+                                        "label": "yes",
+                                        "count": 12,
+                                        "percent": 75.0
+                                    },
+                                    {
+                                        "label": "no",
+                                        "count": 4,
+                                        "percent": 25.0
+                                    }
+                                ],
+                                "name": "numberOfAttributesInherited [15.5]",
+                                "numOfExamples": 16,
+                                "i": 14
+                            }
+                        ],
+                        "isBranch": true,
+                        "classes": [
+                            {
+                                "label": "yes",
+                                "count": 12,
+                                "percent": 63.157894739999996
+                            },
+                            {
+                                "label": "no",
+                                "count": 7,
+                                "percent": 36.842105260000004
+                            }
+                        ],
+                        "name": "rfc [88.5]",
+                        "numOfExamples": 19,
+                        "i": 6
+                    }
+                ],
+                "isBranch": true,
+                "classes": [
+                    {
+                        "label": "yes",
+                        "count": 28,
+                        "percent": 26.66666667
+                    },
+                    {
+                        "label": "no",
+                        "count": 77,
+                        "percent": 73.33333332999999
+                    }
+                ],
+                "name": "numberOfLinesOfCode [290]",
+                "numOfExamples": 105,
+                "i": 2
+            }
+        ],
+        "isBranch": true,
+        "classes": [
+            {
+                "label": "yes",
+                "count": 64,
+                "percent": 9.261939219
+            },
+            {
+                "label": "no",
+                "count": 627,
+                "percent": 90.73806078
+            }
+        ],
+        "name": "cbo [12.5]",
+        "numOfExamples": 691,
+        "i": 0
+    }
+    var backgroundColor = d3.select("body")
+        .attr("bgcolor", "#5C5C5C");
+
+    var margin = {top: 80, right: 120, bottom: 20, left: 120},
+        width = 1200 - margin.right - margin.left,
+        height = 1960 - margin.top - margin.bottom;
+
+    var i = 0,
+        duration = 750,
+        depthExpansionSize = 120;
+
+    var tree = d3.layout.tree()
+        .size([width, height]);
+
+    var diagonal = d3.svg.diagonal()
+        .source(function(d) {
+            return {x: d.source.x, y: d.source.y + 40}; // espaçamento depois do nome
+        })
+        .projection(function(d) { return [d.x, d.y]; });
+        // mudar orientacao da arvore, trocar x e y se quiser mudar para horizontal / vertical
+
+    var svg = d3.select("body")
+      .append("svg")
+        .attr("width", width + margin.right + margin.left)
+        .attr("height", height + margin.top, + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    // tip variables
+    var tip = d3.tip()
+        .attr("class", "d3-tip")
+        .offset([-10,0])
+        .html(function(d, i) { if (d.name != "" ) return d.name; });
+
+    svg.call(tip);
+
+    var pathTip = d3.tip()
+        .attr("class", "d3-tip")
+        .offset([-10,0])
+        .html(function(d, i) { return "aresta" + i; });
+
+    svg.call(pathTip);
+
+
+    // pie variables
+    var color = d3.scale.ordinal()
+        .range(["#5CFF5C", "#FF5C5C"]);
+
+    var arc = d3.svg.arc()
+        .outerRadius(20);
+
+    var pie = d3.layout.pie()
+        .value(function(d) { return d.count; })
+        .sort(null);
+
+
+    var root = treeData;
+    root.x0 = height / 2;
+    root.y0 = 0;
+
+    function collapse(d) {
+        if (d.children) {
+            d._children = d.children;
+            d._children.forEach(collapse);
+            d.children = null;
+        }
+    }
+
+    root.children.forEach(collapse);
+    update(root);
+
+    function update(source) {
+        var nodes = tree.nodes(root).reverse(),
+            links = tree.links(nodes);
+
+            nodes.forEach(function(d) { d.y = d.depth * depthExpansionSize; });
+
+            var node = svg.selectAll("g.node")
+                .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+            var nodeEnter = node.enter()
+              .append("g")
+                .attr("class", "node")
+                .attr("transform", function(d) {
+                    return "translate(" + source.x0 + "," + source.y0 + ")";
+                })
+                .on("click", click);
+                // alterar aqui posição do no, trocar x e y se quiser mudar para horizontal / vertical)
+
+/*            nodeEnter.append("circle")
+                .attr("r", 10)
+                .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+*/
+
+            nodeEnter.selectAll("path")
+                .data(function(d, i) {
+                    return pie(d.classes);
+                })
+              .enter()
+                .append("path")
+                .attr("d", arc)
+                .attr("fill", function(d, i) {
+                    return color(d.data.label);
+                });
+
+
+            nodeEnter.append("text")
+                .attr("class", "label")
+                .attr("dy", "35")
+                .style("font-weight", "bold")
+                .style("font-size", "14px")
+                .text(function(d) { return d.cutPredictor; })
+                .on("mouseover", tip.show)
+                .on("mouseout", tip.hide);
+                
+/*
+            nodeEnter.append("text")
+                .attr("x", function(d) {
+                    return d.children || d._children ? -13 : 13;
+                })
+                .attr("dy", ".35em")
+                .attr("text-anchor", function(d) {
+                    return d.children || d._children ? "end" : "start";
+                })
+                .text(function(d) { return d.name; })
+                .style("fill-opacity", 1);
+*/
+/*           node.on("mouseover", tip.show)
+                .on("mouseout", tip.hide);
+*/
+
+            var nodeUpdate = node.transition()
+                .duration(duration)
+                .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+/*
+            nodeUpdate.select("circle")
+                .attr("r", 10)
+                .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+                */
+
+            nodeUpdate.selectAll("path")
+                .attr("d", arc)
+                .attr("fill", function(d, i) {
+                    return color(d.data.label);
+                });
+/*
+            nodeUpdate.select("text")
+                .style("fill-opacity", 1);
+*/
+
+
+            var nodeExit = node.exit().transition()
+                .duration(duration)
+                .attr("transform", function(d) { return "translate(" + source.x + "," + source.y + ")"; })
+                .remove();
+/*
+            nodeExit.select("circle")
+                .attr("r", 1e-6);*/
+/*
+            nodeExit.select("text")
+                .style("fill-opacity", 1e-6);
+*/
+
+            // arestas
+
+            var link = svg.selectAll("path.link")
+                .data(links, function(d) { return d.target.id; });
+                                
+            link.enter().insert("path", "g")
+                .attr("class", "link")
+                // para onde as arestas vao surgindo
+                .attr("d", function(d) {
+                    var o = {x: source.x0, y: source.y0};
+                    return diagonal({source: o, target: o});
+                });
+                                
+            link.transition()
+                .duration(duration)
+                .attr("d", diagonal);
+
+
+            link.exit().transition()
+                .duration(duration)
+                // para onde as arestas vao sumindo
+                .attr("d", function(d) {
+                    var o = {x: source.x, y: source.y};
+                    return diagonal({source: o, target: o});
+                })
+                .remove();
+
+/*            link.on("mouseover", pathTip.show)
+                .on("mouseout", pathTip.hide);
+*/
+
+            var linkText = svg.selectAll("text.link")
+                .data(links, function(d) { return d.target.id; });
+
+            linkText.enter().insert("text", "g")
+                .attr("class", "label")
+                .style("font-weight", "bold")
+                .attr("x", function(d) { return d.source.x0; })
+                .attr("y", function(d) { return d.source.y0; })
+                .text(function(d, i) {
+                    // se o filho for par, ou seja, esta na esquerda, eh < (unicode 003C) senao eh >= (unicode 2265)
+                    return ((i % 2) == 0 ? "\u003c" : "\u2265") + " " + d.source.cutPoint;                 
+                });
+
+            linkText.transition()
+                .duration(duration)
+                .attr("x", function(d) { return (d.source.x + d.target.x)/2; })
+                .attr("y", function(d) { return (d.source.y + d.target.y)/2; });
+
+
+            linkText.exit().transition()
+                .duration(duration)
+                .attr("x", function(d) { return d.source.x; })
+                .attr("y", function(d) { return d.source.y; })
+                .remove();
+
+
+            nodes.forEach(function(d) {
+                d.x0 = d.x;
+                d.y0 = d.y;
+            });
+    }
+
+    function click(d) {
+        if (d.children) {
+            d._children = d.children;
+            d.children = null;
+        } else {
+            d.children = d._children;
+            d._children = null;
+        }
+        update(d);
+    }
+</script>
+</body>
+</html>
