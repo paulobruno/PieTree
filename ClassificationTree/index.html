@@ -14,18 +14,22 @@
 
 .node text {
     font: 12px sans-serif;
+    text-anchor: middle;
+    fill: #fff;
 }
 
-.link {
+path.link {
     fill: none;
     stroke: #fff;
     stroke-width: 4;
 }
-.label {
-    font: 14px sans-serif;
+
+.link text {
+    font: 12px sans-serif;
     text-anchor: middle;
     fill: #fff;
 }
+
 .d3-tip {
     line-height: 1;
     font-weight: bold;
@@ -1974,14 +1978,12 @@
 
 
             nodeEnter.append("text")
-                .attr("class", "label")
+                .attr("class", "text")
                 .attr("dy", "35")
                 .style("font-weight", "bold")
                 .style("font-size", "14px")
                 .text(function(d) { return d.cutPredictor; })
-                .on("mouseover", tip.show)
-                .on("mouseout", tip.hide);
-                
+
 /*
             nodeEnter.append("text")
                 .attr("x", function(d) {
@@ -2034,7 +2036,8 @@
 
             var link = svg.selectAll("path.link")
                 .data(links, function(d) { return d.target.id; });
-                                
+                
+                
             link.enter().insert("path", "g")
                 .attr("class", "link")
                 // para onde as arestas vao surgindo
@@ -2061,17 +2064,15 @@
                 .on("mouseout", pathTip.hide);
 */
 
-            var linkText = svg.selectAll("text.link")
+            var linkText = svg.selectAll("g.link")
                 .data(links, function(d) { return d.target.id; });
 
-            linkText.enter().insert("text", "g")
+            linkText.enter().insert("g")
                 .attr("class", "label")
+              .append("text")
                 .style("font-weight", "bold")
-                .attr("x", function(d) { return d.source.x0; })
-                .attr("y", function(d) { return d.source.y0; })
-                .text(function(d, i) {
-                    // se o filho for par, ou seja, esta na esquerda, eh < (unicode 003C) senao eh >= (unicode 2265)
-                    return ((i % 2) == 0 ? "\u003c" : "\u2265") + " " + d.source.cutPoint;                 
+                .text(function(d) {
+                    return d.source.cutPoint;
                 });
 
             linkText.transition()
@@ -2079,11 +2080,10 @@
                 .attr("x", function(d) { return (d.source.x + d.target.x)/2; })
                 .attr("y", function(d) { return (d.source.y + d.target.y)/2; });
 
-
             linkText.exit().transition()
-                .duration(duration)
-                .attr("x", function(d) { return d.source.x; })
-                .attr("y", function(d) { return d.source.y; })
+//                .duration(duration)
+//                .attr("x", function(d) { return d.source.x; })
+//                .attr("y", function(d) { return d.source.y; })
                 .remove();
 
 
