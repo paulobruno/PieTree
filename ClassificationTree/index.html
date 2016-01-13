@@ -36,6 +36,14 @@
     fill: #fff;
 }
 
+.legend {
+    font: 14px sans-serif;
+}
+
+rect {
+    stroke-width: 2;
+}
+
 .d3-tip {
     line-height: 1;
     font-weight: bold;
@@ -53,6 +61,7 @@
 <script src="../d3/d3.tip.v0.6.3.js"></script>
 
 <script>
+
     var treeData =
     {
         "cutPoint": 12.5,
@@ -1878,6 +1887,8 @@
         "numOfExamples": 691,
         "i": 0
     }
+    
+    
     var backgroundColor = d3.select("body")
         .attr("bgcolor", "#5C5C5C");
 
@@ -1888,6 +1899,17 @@
     var i = 0,
         duration = 750,
         depthExpansionSize = 120;
+
+    // pie variables
+    var color = d3.scale.ordinal()
+        .range(["#5CFF5C", "#FF5C5C"]);
+
+    var arc = d3.svg.arc()
+        .outerRadius(20);
+
+    var pie = d3.layout.pie()
+        .value(function(d) { return d.count; })
+        .sort(null);
 
     var tree = d3.layout.tree()
         .size([width, height]);
@@ -1905,7 +1927,7 @@
         .attr("height", height + margin.top, + margin.bottom)
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+        
     // tip variables
     var tip = d3.tip()
         .attr("class", "d3-tip")
@@ -1922,18 +1944,7 @@
     svg.call(pathTip);
 
 
-    // pie variables
-    var color = d3.scale.ordinal()
-        .range(["#5CFF5C", "#FF5C5C"]);
-
-    var arc = d3.svg.arc()
-        .outerRadius(20);
-
-    var pie = d3.layout.pie()
-        .value(function(d) { return d.count; })
-        .sort(null);
-
-
+    // tree
     var root = treeData;
     root.x0 = height / 2;
     root.y0 = 0;
@@ -2122,6 +2133,45 @@
         }
         update(d);
     }
+    
+    
+    // chart legend
+    var legendSpacingX = 4;
+    var legendSpacingY = 40;
+    var legendRectSize = 18;
+    var legendRectSpacingX = 4;
+    var legendRectSpacingY = -4;
+    
+    var rectLegend = svg.append("rect")
+        .attr("width", "150")
+        .attr("height", "150")  
+        .attr("rx", "5")
+        .attr("ry", "5")
+        .style("fill", "#fff")
+        .style("opacity", "0.8");
+    
+    var legend = svg.selectAll(".legend")
+        .data(color.domain())
+        .enter()
+      .append("g")
+        .attr("class", "legend")
+        .attr("transform", function(d, i) {
+            return "translate(" + legendSpacingX + "," + ((i+1) * legendSpacingY) + ")";
+        });           
+        
+    legend.append("rect")
+        .attr("width", legendRectSize)
+        .attr("height", legendRectSize)
+        .style("fill", color)
+        .style("stroke", color);
+        
+    legend.append("text")
+        .attr("x", legendRectSize + legendRectSpacingX)
+        .attr("y", legendRectSize + legendRectSpacingY)
+        .text(function(d, i) {
+            return (i == 0) ? "yes" : "no";
+        });
+        
 </script>
 </body>
 </html>
