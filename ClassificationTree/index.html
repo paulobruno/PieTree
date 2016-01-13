@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+
 <style>
 .node {
     cursor: pointer;
@@ -14,17 +15,22 @@
 
 .node text {
     font: 12px sans-serif;
-    text-anchor: middle;
-    fill: #fff;
 }
 
-path.link {
+.link {
     fill: none;
     stroke: #fff;
     stroke-width: 4;
 }
 
 .link text {
+    font: 12px sans-serif;
+    text-anchor: middle;
+    stroke: none;
+    fill:#fff;
+}
+
+.label {
     font: 12px sans-serif;
     text-anchor: middle;
     fill: #fff;
@@ -39,6 +45,7 @@ path.link {
     border-radius: 2px;
 }
 </style>
+
 </head>
 
 <body>
@@ -1946,7 +1953,9 @@ path.link {
         var nodes = tree.nodes(root).reverse(),
             links = tree.links(nodes);
 
-            nodes.forEach(function(d) { d.y = d.depth * depthExpansionSize; });
+            nodes.forEach(function(d) {
+                d.y = d.depth * depthExpansionSize; 
+            });
 
             var node = svg.selectAll("g.node")
                 .data(nodes, function(d) { return d.id || (d.id = ++i); });
@@ -1978,12 +1987,14 @@ path.link {
 
 
             nodeEnter.append("text")
-                .attr("class", "text")
+                .attr("class", "label")
                 .attr("dy", "35")
                 .style("font-weight", "bold")
                 .style("font-size", "14px")
                 .text(function(d) { return d.cutPredictor; })
-
+                .on("mouseover", tip.show)
+                .on("mouseout", tip.hide);
+                
 /*
             nodeEnter.append("text")
                 .attr("x", function(d) {
@@ -2036,8 +2047,7 @@ path.link {
 
             var link = svg.selectAll("path.link")
                 .data(links, function(d) { return d.target.id; });
-                
-                
+                                
             link.enter().insert("path", "g")
                 .attr("class", "link")
                 // para onde as arestas vao surgindo
@@ -2067,23 +2077,32 @@ path.link {
             var linkText = svg.selectAll("g.link")
                 .data(links, function(d) { return d.target.id; });
 
-            linkText.enter().insert("g")
-                .attr("class", "label")
+            linkText.enter()
+              .insert("g")
+                .attr("class", "link")
+                .attr("transform", function(d) {
+                    return "translate(" + d.source.x0 + "," + source.y0 + ")";
+                })
               .append("text")
+                .attr("dy", ".35em")
                 .style("font-weight", "bold")
-                .text(function(d) {
-                    return d.source.cutPoint;
+                .text(function(d, i) {
+                    // se o filho for par, ou seja, esta na esquerda, eh < (unicode 003C) senao eh >= (unicode 2265)
+                    return ((i % 2) == 0 ? "\u003c" : "\u2265") + " " + d.source.cutPoint;                 
                 });
 
             linkText.transition()
                 .duration(duration)
-                .attr("x", function(d) { return (d.source.x + d.target.x)/2; })
-                .attr("y", function(d) { return (d.source.y + d.target.y)/2; });
+                .attr("transform", function(d) {
+                    return "translate("
+                        + (((d.source.x + d.target.x)/2)) + ","
+                        + (((d.source.y + d.target.y)/2)) + ")";
+                });
+
 
             linkText.exit().transition()
-//                .duration(duration)
-//                .attr("x", function(d) { return d.source.x; })
-//                .attr("y", function(d) { return d.source.y; })
+                .duration(duration)
+                .attr("transform", function(d) { return "translate(" + d.source.x + "," + d.source.y + ")"; })
                 .remove();
 
 
