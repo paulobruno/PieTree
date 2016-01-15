@@ -2002,7 +2002,6 @@ rect {
                 .attr("dy", "35")
                 .style("font-weight", "bold")
                 .style("font-size", "14px")
-                .text(function(d) { return d.cutPredictor; })
                 .on("mouseover", tip.show)
                 .on("mouseout", tip.hide);
                 
@@ -2030,6 +2029,10 @@ rect {
                 .attr("r", 10)
                 .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
                 */
+            nodeUpdate.selectAll("text")
+                .text(function(d) { 
+                    return d.children ? d.cutPredictor : (d.isBranch ? "+" : " ");
+                });
 
             nodeUpdate.selectAll("path")
                 .attr("d", arc)
@@ -2085,21 +2088,33 @@ rect {
                 .on("mouseout", pathTip.hide);
 */
 
+            // label das arestas
+
             var linkText = svg.selectAll("g.link")
                 .data(links, function(d) { return d.target.id; });
 
-            linkText.enter()
-              .insert("g")
+            var linkTextEnter = linkText.enter().insert("g")
                 .attr("class", "link")
                 .attr("transform", function(d) {
-                    return "translate(" + d.source.x0 + "," + source.y0 + ")";
-                })
-              .append("text")
+                    return "translate(" + source.x0 + "," + source.y0 + ")";
+                });
+
+            linkTextEnter.append("text")
                 .attr("dy", ".35em")
+                .attr("transform", "translate(0,-10)")
                 .style("font-weight", "bold")
                 .text(function(d, i) {
                     // se o filho for par, ou seja, esta na esquerda, eh < (unicode 003C) senao eh >= (unicode 2265)
                     return ((i % 2) == 0 ? "\u003c" : "\u2265") + " " + d.source.cutPoint;                 
+                });
+
+            linkTextEnter.append("text")
+                .attr("dy", ".35em")
+                .attr("transform", "translate(0,5)")
+                .style("font-weight", "bold")
+                .text(function(d, i) {
+                    // se o filho for par, ou seja, esta na esquerda, eh < (unicode 003C) senao eh >= (unicode 2265)
+                    return "(" + d.target.numOfExamples + ")";
                 });
 
             linkText.transition()
@@ -2113,7 +2128,7 @@ rect {
 
             linkText.exit().transition()
                 .duration(duration)
-                .attr("transform", function(d) { return "translate(" + d.source.x + "," + d.source.y + ")"; })
+                .attr("transform", function(d) { return "translate(" + source.x + "," + source.y + ")"; })
                 .remove();
 
 
