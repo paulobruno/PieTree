@@ -1894,9 +1894,9 @@ rect {
     var backgroundColor = d3.select("body")
         .attr("bgcolor", "#5C5C5C");
 
-    var margin = {top: 80, right: 120, bottom: 20, left: 120},
+    var margin = {top: 50, right: 50, bottom: 20, left: 50},
         width = 1200 - margin.right - margin.left,
-        height = 1960 - margin.top - margin.bottom;
+        height = 1700 - margin.top - margin.bottom;
 
     var i = 0,
         duration = 750,
@@ -1907,7 +1907,9 @@ rect {
         .range(["#5CFF5C", "#FF5C5C"]);
 
     var arc = d3.svg.arc()
-        .outerRadius(20);
+        .outerRadius(function(d, i) {
+            return 20;
+        });
 
     var pie = d3.layout.pie()
         .value(function(d) { return d.count; })
@@ -2168,7 +2170,7 @@ rect {
     
     var spacingBetweenRect = innerRectSize + spanY; 
     
-    var numOfRects = color.length + 1; // color.length retorna 1 a menos
+    var numOfRects = color.length + 1; // metodo length retorna 1 a menos
     var outerRectWidth = (2 * innerRectSpacingY) + (numOfRects * innerRectSize) + ((numOfRects-1) * spanY);
     
     // legend outer rect
@@ -2224,7 +2226,15 @@ rect {
         .style("fill", "#fff")
         .style("font", function(d) { return fontSize + "px sans-serif"; })
         .style("font-weight", "bold");
-        
+        /*
+    var checkboxes = d3.select("body")
+      .append("form")
+        .attr("action", "")
+      .append("input")
+        .attr("type", "checkbox")
+        .attr("value", "showLabels")
+        .html("lalala");
+        */
 </script>
 </body>
 </html>
