@@ -51,6 +51,8 @@ rect {
     background: rgba(0, 0, 0, 0.8);
     color: #fff;
     border-radius: 2px;
+    font: 14px sans-serif;
+    font-weight: bold;
 }
 </style>
 
@@ -2151,41 +2153,77 @@ rect {
     
     
     // chart legend
-    var legendSpacingX = 4;
-    var legendSpacingY = 40;
-    var legendRectSize = 18;
-    var legendRectSpacingX = 4;
-    var legendRectSpacingY = -4;
+    var innerWidthSpacing = 10;
+    var innerHeightSpacing = 10;
     
+    var fontSize = 14;
+    var innerRectSize = 28;
+    
+    var innerLabelSpacingX = 10;
+    var innerLabelSpacingY = -2 + (-(innerRectSize - fontSize) / 2);
+    
+    var spanY = 14;
+    var innerRectSpacingX = 15;
+    var innerRectSpacingY = 15;
+    
+    var spacingBetweenRect = innerRectSize + spanY; 
+    
+    var numOfRects = color.length + 1; // color.length retorna 1 a menos
+    var outerRectWidth = (2 * innerRectSpacingY) + (numOfRects * innerRectSize) + ((numOfRects-1) * spanY);
+    
+    // legend outer rect
     var rectLegend = svg.append("rect")
         .attr("width", "150")
-        .attr("height", "150")  
-        .attr("rx", "5")
-        .attr("ry", "5")
-        .style("fill", "#fff")
-        .style("opacity", "0.8");
-    
+        .attr("height", outerRectWidth)
+        .attr("rx", "20")
+        .attr("ry", "20")
+        .style("fill", "#5c5c5c")
+        .style("stroke", "#fff")
+        .style("stroke-width", "5px")
+        .style("opacity", "1");
+        
+    // rect + label group
     var legend = svg.selectAll(".legend")
         .data(color.domain())
         .enter()
       .append("g")
         .attr("class", "legend")
         .attr("transform", function(d, i) {
-            return "translate(" + legendSpacingX + "," + ((i+1) * legendSpacingY) + ")";
-        });           
+            return "translate(" + innerRectSpacingX + "," + (innerRectSpacingY + (i * spacingBetweenRect)) + ")";
+        });
         
+    // help tip
+    var helpColorTip = d3.tip()
+        .attr("class", "d3-tip")
+        .offset([-10,0])
+        .html(function(d, i) { 
+            return (i == 0) ? "if is yes" : "if is no"; 
+        });
+
+    svg.call(helpColorTip);
+    
+    legend.on("mouseover", helpColorTip.show)
+          .on("mouseout", helpColorTip.hide);
+            
+    // red and green rects
     legend.append("rect")
-        .attr("width", legendRectSize)
-        .attr("height", legendRectSize)
+        .attr("width", innerRectSize)
+        .attr("height", innerRectSize)
+        .attr("rx", "5")
+        .attr("ry", "5")
         .style("fill", color)
         .style("stroke", color);
-        
+    
+    // yes and no labels    
     legend.append("text")
-        .attr("x", legendRectSize + legendRectSpacingX)
-        .attr("y", legendRectSize + legendRectSpacingY)
+        .attr("x", innerRectSize + innerLabelSpacingX)
+        .attr("y", innerRectSize + innerLabelSpacingY)
         .text(function(d, i) {
             return (i == 0) ? "yes" : "no";
-        });
+        })
+        .style("fill", "#fff")
+        .style("font", function(d) { return fontSize + "px sans-serif"; })
+        .style("font-weight", "bold");
         
 </script>
 </body>
