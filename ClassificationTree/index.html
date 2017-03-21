@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="author" content="Paulo Bruno de Sousa Serafim, Fortaleza, Brazil">
 
 <style>
 .node {
@@ -1890,7 +1891,8 @@ rect {
         "i": 0
     }
     
-    
+    // Paulo Bruno de Sousa Serafim, Fortaleza, 2016
+
     var backgroundColor = d3.select("body")
         .attr("bgcolor", "#5C5C5C");
 
@@ -1904,7 +1906,7 @@ rect {
 
     // pie variables
     var color = d3.scale.ordinal()
-        .range(["#f77e05", "#53b0eb"]);
+        .range(["#53b0eb", "#f77e05"]);
 
     var arc = d3.svg.arc()
         .outerRadius(function(d, i) {
@@ -1920,10 +1922,11 @@ rect {
 
     var diagonal = d3.svg.diagonal()
         .source(function(d) {
-            return {x: d.source.x, y: d.source.y + 40}; // espaçamento depois do nome
+            // spacing after the name
+            return {x: d.source.x, y: d.source.y + 40};
         })
+        // swap x and y to changle horizontal/vertical orientation
         .projection(function(d) { return [d.x, d.y]; });
-        // mudar orientacao da arvore, trocar x e y se quiser mudar para horizontal / vertical
 
     var svg = d3.select("body")
       .append("svg")
@@ -1979,10 +1982,11 @@ rect {
               .append("g")
                 .attr("class", "node")
                 .attr("transform", function(d) {
+                    // change the position of the node here
+                    // swap x and y to changle horizontal/vertical orientation
                     return "translate(" + source.x0 + "," + source.y0 + ")";
                 })
                 .on("click", click);
-                // alterar aqui posição do no, trocar x e y se quiser mudar para horizontal / vertical)
 
 /*            nodeEnter.append("circle")
                 .attr("r", 10)
@@ -2061,14 +2065,14 @@ rect {
                 .style("fill-opacity", 1e-6);
 */
 
-            // arestas
+            // edges
 
             var link = svg.selectAll("path.link")
                 .data(links, function(d) { return d.target.id; });
                                 
             link.enter().insert("path", "g")
                 .attr("class", "link")
-                // para onde as arestas vao surgindo
+                // from where the edges come
                 .attr("d", function(d) {
                     var o = {x: source.x0, y: source.y0};
                     return diagonal({source: o, target: o});
@@ -2081,7 +2085,7 @@ rect {
 
             link.exit().transition()
                 .duration(duration)
-                // para onde as arestas vao sumindo
+                // to where the edges go
                 .attr("d", function(d) {
                     var o = {x: source.x, y: source.y};
                     return diagonal({source: o, target: o});
@@ -2092,7 +2096,7 @@ rect {
                 .on("mouseout", pathTip.hide);
 */
 
-            // label das arestas
+            // edge labels
 
             var linkText = svg.selectAll("g.link")
                 .data(links, function(d) { return d.target.id; });
@@ -2108,7 +2112,8 @@ rect {
                 .attr("transform", "translate(0,-10)")
                 .style("font-weight", "bold")
                 .text(function(d, i) {
-                    // se o filho for par, ou seja, esta na esquerda, eh < (unicode 003C) senao eh >= (unicode 2265)
+                    // if the child is even, that is, is in on the left, < (unicode 003C)
+                    // else, >= (unicode 2265)
                     return ((i % 2) == 0 ? "\u003c" : "\u2265") + " " + d.source.cutPoint;                 
                 });
 
@@ -2117,7 +2122,6 @@ rect {
                 .attr("transform", "translate(0,5)")
                 .style("font-weight", "bold")
                 .text(function(d, i) {
-                    // se o filho for par, ou seja, esta na esquerda, eh < (unicode 003C) senao eh >= (unicode 2265)
                     return "(" + d.target.numOfExamples + ")";
                 });
 
@@ -2170,7 +2174,7 @@ rect {
     
     var spacingBetweenRect = innerRectSize + spanY; 
     
-    var numOfRects = color.length + 1; // metodo length retorna 1 a menos
+    var numOfRects = color.length + 1; // length method returns one less
     var outerRectWidth = (2 * innerRectSpacingY) + (numOfRects * innerRectSize) + ((numOfRects-1) * spanY);
     
     // legend outer rect
