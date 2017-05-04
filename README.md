@@ -4,4 +4,4 @@ This is an incomplete project of a visualization tool of [Decision Trees](https:
 
 The project was abandoned in 2016 and since I am a totally beginner in d3 (and had spent more time than I should making this "demo"), I stopped working on it. If someone wants to finish this job, I would be very happy to help. Please, contact me.
 
-A demo page can be found [here](https://http://paulobruno.github.io/PieTree/ClassificationTree).
+A demo page can be found [here](https://paulobruno.github.io/PieTree/ClassificationTree).
